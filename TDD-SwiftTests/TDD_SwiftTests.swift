@@ -1,34 +1,22 @@
-//
-//  TDD_SwiftTests.swift
-//  TDD-SwiftTests
-//
-//  Created by 小野 純平 on 2019/06/26.
-//  Copyright © 2019 com.swiswiswift. All rights reserved.
-//
-
 import XCTest
 @testable import TDD_Swift
 
 class TDD_SwiftTests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testMultiplication() {
+        let five: Dollar = Dollar(amount: 5)
+        XCTAssertEqual(Dollar(amount: 10), five.times(2))
+        XCTAssertEqual(Dollar(amount: 15), five.times(3))
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func testEquality() {
+        XCTAssertTrue(Dollar(amount: 5) == Dollar(amount: 5))
+        XCTAssertFalse(Dollar(amount: 5) == Dollar(amount: 6))
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testFrancMultiplication() {
+        let five = Franc(amount: 5)
+        XCTAssertEqual(Franc(amount: 10), five.times(2))
+        XCTAssertEqual(Franc(amount: 15), five.times(3))
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
