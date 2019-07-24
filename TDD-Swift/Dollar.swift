@@ -1,5 +1,5 @@
-class Dollar:Money {
-    
+class Dollar: Money {
+
     init(amount: Int) {
         super.init()
         self.amount = amount
