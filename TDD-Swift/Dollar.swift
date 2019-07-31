@@ -5,7 +5,7 @@ class Dollar: Money {
         self.amount = amount
     }
 
-    func times(_ multiplier: Int) -> Dollar {
+    override func times(_ multiplier: Int) -> Money {
         return Dollar(amount: amount * multiplier)
     }
 }

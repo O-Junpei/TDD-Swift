@@ -4,7 +4,7 @@ import XCTest
 class TDD_SwiftTests: XCTestCase {
 
     func testMultiplication() {
-        let five: Dollar = Dollar(amount: 5)
+        let five: Money = Money.doller(amount: 5)
         XCTAssertEqual(Dollar(amount: 10), five.times(2))
         XCTAssertEqual(Dollar(amount: 15), five.times(3))
     }
@@ -19,7 +19,7 @@ class TDD_SwiftTests: XCTestCase {
     }
     
     func testFrancMultiplication() {
-        let five = Franc(amount: 5)
+        let five: Money = Money.franc(amount: 5)
         XCTAssertEqual(Franc(amount: 10), five.times(2))
         XCTAssertEqual(Franc(amount: 15), five.times(3))
     }
