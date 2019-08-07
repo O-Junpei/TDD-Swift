@@ -1,6 +1,8 @@
 class Dollar: Money {
+    private let currency: String
 
     init(amount: Int) {
+        currency = "USD"
         super.init()
         self.amount = amount
     }
