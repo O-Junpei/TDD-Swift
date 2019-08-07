@@ -1,13 +1,9 @@
 class Franc: Money {
-    private let currency: String
-
-    init(amount: Int) {
-        currency = "CHF"
-        super.init()
-        self.amount = amount
+    override init(amount: Int, currency: String) {
+        super.init(amount: amount, currency: currency)
     }
 
     override func times(_ multiplier: Int) -> Money {
-        return Franc(amount: amount * multiplier)
+        return Money.franc(amount: amount * multiplier)
     }
 }
