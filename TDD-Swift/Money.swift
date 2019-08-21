@@ -1,14 +1,18 @@
-class Money: Equatable {
+class Money: Equatable, CustomStringConvertible {
     var amount: Int = 0
-    var currency: String!
+    var currency: String
     
     init(amount: Int, currency: String) {
         self.amount = amount
         self.currency = currency
     }
+    
+    var description: String {
+        return "\(amount) \(String(describing: currency))"
+    }
 
     static func == (lhs: Money, rhs: Money) -> Bool {
-        return lhs.amount == rhs.amount && String(describing: type(of: lhs)) == String(describing: type(of: rhs))
+        return lhs.amount == rhs.amount && lhs.currency == rhs.currency
     }
 
     static func dollar(amount: Int) -> Dollar {
@@ -20,6 +24,6 @@ class Money: Equatable {
     }
 
     func times(_ multiplier: Int) -> Money {
-        fatalError("Must be overridden")
+        return Money(amount: amount * multiplier, currency: currency)
     }
 }
