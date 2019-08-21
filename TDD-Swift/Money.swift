@@ -8,19 +8,19 @@ class Money: Equatable, CustomStringConvertible {
     }
     
     var description: String {
-        return "\(amount) \(String(describing: currency))"
+        return "\(amount) \(currency.description))"
     }
 
     static func == (lhs: Money, rhs: Money) -> Bool {
         return lhs.amount == rhs.amount && lhs.currency == rhs.currency
     }
 
-    static func dollar(amount: Int) -> Dollar {
-        return Dollar(amount: amount, currency: "USD")
+    static func dollar(amount: Int) -> Money {
+        return Money(amount: amount, currency: "USD")
     }
 
-    static func franc(amount: Int) -> Franc {
-        return Franc(amount: amount, currency: "CHF")
+    static func franc(amount: Int) -> Money {
+        return Money(amount: amount, currency: "CHF")
     }
 
     func times(_ multiplier: Int) -> Money {

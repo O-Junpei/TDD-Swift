@@ -12,8 +12,6 @@ class TDD_SwiftTests: XCTestCase {
     func testEquality() {
         XCTAssertTrue(Money.dollar(amount: 5) == Money.dollar(amount: 5))
         XCTAssertFalse(Money.dollar(amount: 5) == Money.dollar(amount: 6))
-        XCTAssertTrue(Money.franc(amount: 5) == Money.franc(amount: 5))
-        XCTAssertFalse(Money.franc(amount: 5) == Money.franc(amount: 6))
         XCTAssertFalse(Money.franc(amount: 5) == Money.dollar(amount: 5))
     }
     

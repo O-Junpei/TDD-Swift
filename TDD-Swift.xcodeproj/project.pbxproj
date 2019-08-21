@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		178F6E0822DEC0AF0051FB24 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178F6E0722DEC0AF0051FB24 /* Money.swift */; };
-		178F6E0A22DEC1340051FB24 /* Franc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178F6E0922DEC1340051FB24 /* Franc.swift */; };
 		17AFAA6122C323E7009280AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AFAA6022C323E7009280AB /* AppDelegate.swift */; };
 		17AFAA6322C323E7009280AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AFAA6222C323E7009280AB /* ViewController.swift */; };
 		17AFAA6622C323E7009280AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17AFAA6422C323E7009280AB /* Main.storyboard */; };
@@ -16,7 +15,6 @@
 		17AFAA6B22C323E8009280AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17AFAA6922C323E8009280AB /* LaunchScreen.storyboard */; };
 		17AFAA7622C323E8009280AB /* TDD_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AFAA7522C323E8009280AB /* TDD_SwiftTests.swift */; };
 		17AFAA8122C323E8009280AB /* TDD_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AFAA8022C323E8009280AB /* TDD_SwiftUITests.swift */; };
-		17AFAA8F22C324CA009280AB /* Dollar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AFAA8E22C324CA009280AB /* Dollar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +36,6 @@
 
 /* Begin PBXFileReference section */
 		178F6E0722DEC0AF0051FB24 /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
-		178F6E0922DEC1340051FB24 /* Franc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Franc.swift; sourceTree = "<group>"; };
 		17AFAA5D22C323E7009280AB /* TDD-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TDD-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17AFAA6022C323E7009280AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17AFAA6222C323E7009280AB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -52,7 +49,6 @@
 		17AFAA7C22C323E8009280AB /* TDD-SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TDD-SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17AFAA8022C323E8009280AB /* TDD_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDD_SwiftUITests.swift; sourceTree = "<group>"; };
 		17AFAA8222C323E8009280AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		17AFAA8E22C324CA009280AB /* Dollar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dollar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,8 +106,6 @@
 				17AFAA6922C323E8009280AB /* LaunchScreen.storyboard */,
 				17AFAA6C22C323E8009280AB /* Info.plist */,
 				178F6E0722DEC0AF0051FB24 /* Money.swift */,
-				17AFAA8E22C324CA009280AB /* Dollar.swift */,
-				178F6E0922DEC1340051FB24 /* Franc.swift */,
 			);
 			path = "TDD-Swift";
 			sourceTree = "<group>";
@@ -266,8 +260,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				17AFAA6322C323E7009280AB /* ViewController.swift in Sources */,
-				17AFAA8F22C324CA009280AB /* Dollar.swift in Sources */,
-				178F6E0A22DEC1340051FB24 /* Franc.swift in Sources */,
 				178F6E0822DEC0AF0051FB24 /* Money.swift in Sources */,
 				17AFAA6122C323E7009280AB /* AppDelegate.swift in Sources */,
 			);
