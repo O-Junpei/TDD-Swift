@@ -25,4 +25,9 @@ class TDD_SwiftTests: XCTestCase {
         XCTAssertEqual("USD", Money.dollar(amount: 1).currency)
         XCTAssertEqual("CHF", Money.franc(amount: 1).currency)
     }
+    
+    func testSimpleAdditon() {
+        let sum: Money = Money.dollar(amount: 5).plus(Money.dollar(amount: 5))
+        XCTAssertEqual(Money.dollar(amount: 10), sum)
+    }
 }
