@@ -27,7 +27,13 @@ class TDD_SwiftTests: XCTestCase {
     }
     
     func testSimpleAdditon() {
-        let sum: Money = Money.dollar(amount: 5).plus(Money.dollar(amount: 5))
+        let sum: Money = Money.dollar(amount: 5).plus(added: Money.dollar(amount: 5))
         XCTAssertEqual(Money.dollar(amount: 10), sum)
+        
+        let five: Money = Money.dollar(amount: 5)
+        let sum: Expression = five.plus(five)
+        let bank: Bank = Bank()
+        let reduced: Money = bank.reduce(sum, "USD")
+        XCTAssertEqual(Money.dollar(amount: 10), reduced)
     }
 }

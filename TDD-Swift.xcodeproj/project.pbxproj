@@ -15,6 +15,8 @@
 		17AFAA6B22C323E8009280AB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17AFAA6922C323E8009280AB /* LaunchScreen.storyboard */; };
 		17AFAA7622C323E8009280AB /* TDD_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AFAA7522C323E8009280AB /* TDD_SwiftTests.swift */; };
 		17AFAA8122C323E8009280AB /* TDD_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AFAA8022C323E8009280AB /* TDD_SwiftUITests.swift */; };
+		17EB3D0D231F583600F8AB30 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EB3D0C231F583600F8AB30 /* Expression.swift */; };
+		17EB3D0F231F58B100F8AB30 /* Bank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EB3D0E231F58B100F8AB30 /* Bank.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		17AFAA7C22C323E8009280AB /* TDD-SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TDD-SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17AFAA8022C323E8009280AB /* TDD_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDD_SwiftUITests.swift; sourceTree = "<group>"; };
 		17AFAA8222C323E8009280AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17EB3D0C231F583600F8AB30 /* Expression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
+		17EB3D0E231F58B100F8AB30 /* Bank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 				17AFAA6922C323E8009280AB /* LaunchScreen.storyboard */,
 				17AFAA6C22C323E8009280AB /* Info.plist */,
 				178F6E0722DEC0AF0051FB24 /* Money.swift */,
+				17EB3D0E231F58B100F8AB30 /* Bank.swift */,
+				17EB3D0C231F583600F8AB30 /* Expression.swift */,
 			);
 			path = "TDD-Swift";
 			sourceTree = "<group>";
@@ -261,7 +267,9 @@
 			files = (
 				17AFAA6322C323E7009280AB /* ViewController.swift in Sources */,
 				178F6E0822DEC0AF0051FB24 /* Money.swift in Sources */,
+				17EB3D0F231F58B100F8AB30 /* Bank.swift in Sources */,
 				17AFAA6122C323E7009280AB /* AppDelegate.swift in Sources */,
+				17EB3D0D231F583600F8AB30 /* Expression.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

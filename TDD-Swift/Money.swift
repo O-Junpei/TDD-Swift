@@ -1,4 +1,4 @@
-class Money: Equatable, CustomStringConvertible {
+class Money: Equatable, CustomStringConvertible, Expression {
     var amount: Int = 0
     var currency: String
     
@@ -25,5 +25,9 @@ class Money: Equatable, CustomStringConvertible {
 
     func times(_ multiplier: Int) -> Money {
         return Money(amount: amount * multiplier, currency: currency)
+    }
+    
+    func plus(added: Money) -> Expression {
+        return Money(amount: amount + added.amount, currency: currency)
     }
 }
