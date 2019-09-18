@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		178F6E0822DEC0AF0051FB24 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178F6E0722DEC0AF0051FB24 /* Money.swift */; };
+		1791C3032331CBF800425BF8 /* Sum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1791C3022331CBF800425BF8 /* Sum.swift */; };
 		17AFAA6122C323E7009280AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AFAA6022C323E7009280AB /* AppDelegate.swift */; };
 		17AFAA6322C323E7009280AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AFAA6222C323E7009280AB /* ViewController.swift */; };
 		17AFAA6622C323E7009280AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17AFAA6422C323E7009280AB /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		178F6E0722DEC0AF0051FB24 /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
+		1791C3022331CBF800425BF8 /* Sum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sum.swift; sourceTree = "<group>"; };
 		17AFAA5D22C323E7009280AB /* TDD-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TDD-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17AFAA6022C323E7009280AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17AFAA6222C323E7009280AB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				178F6E0722DEC0AF0051FB24 /* Money.swift */,
 				17EB3D0E231F58B100F8AB30 /* Bank.swift */,
 				17EB3D0C231F583600F8AB30 /* Expression.swift */,
+				1791C3022331CBF800425BF8 /* Sum.swift */,
 			);
 			path = "TDD-Swift";
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				17EB3D0F231F58B100F8AB30 /* Bank.swift in Sources */,
 				17AFAA6122C323E7009280AB /* AppDelegate.swift in Sources */,
 				17EB3D0D231F583600F8AB30 /* Expression.swift in Sources */,
+				1791C3032331CBF800425BF8 /* Sum.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

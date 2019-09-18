@@ -28,6 +28,10 @@ class Money: Equatable, CustomStringConvertible, Expression {
     }
     
     func plus(added: Money) -> Expression {
-        return Money(amount: amount + added.amount, currency: currency)
+        return Sum(augend: self, added: added)
+    }
+    
+    func reduce(to: String) -> Money{
+        return self
     }
 }
