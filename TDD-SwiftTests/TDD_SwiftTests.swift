@@ -54,4 +54,15 @@ class TDD_SwiftTests: XCTestCase {
         let result: Money = bank.reduce(source: Money.dollar(amount: 1), to: "USD")
         XCTAssertEqual(Money.dollar(amount: 1), result)
     }
+    
+    func testReduceMoneyDifferentCurrency() {
+        let bank: Bank = Bank()
+        bank.addRate(from: "CHF", to: "USD", rate: 2)
+        let result: Money = bank.reduce(source: Money.franc(amount: 2), to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 1), result)
+    }
+    
+    func testIdentityRate() {
+        XCTAssertEqual(1, Bank().rate(from: "USD", to: "USD"))
+    }
 }

@@ -31,7 +31,8 @@ class Money: Equatable, CustomStringConvertible, Expression {
         return Sum(augend: self, added: added)
     }
     
-    func reduce(to: String) -> Money{
-        return self
+    func reduce(bank: Bank, to: String) -> Money{
+        let rate: Int = bank.rate(from: currency, to: to)
+        return Money(amount: amount / rate, currency: to)        
     }
 }
