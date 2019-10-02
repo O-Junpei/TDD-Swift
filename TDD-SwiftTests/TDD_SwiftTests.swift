@@ -65,4 +65,13 @@ class TDD_SwiftTests: XCTestCase {
     func testIdentityRate() {
         XCTAssertEqual(1, Bank().rate(from: "USD", to: "USD"))
     }
+    
+    func testMixedAddition() {
+        let fiveBucks: Money = Money.dollar(amount: 5)
+        let tenFrancs: Money = Money.franc(amount: 10)
+        let bank: Bank = Bank()
+        bank.addRate(from: "CHF", to: "USD", rate: 2)
+        let result: Money = bank.reduce(source: fiveBucks.plus(added: tenFrancs), to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 10), result)
+    }
 }

@@ -8,7 +8,7 @@ class Sum: Expression {
     }
     
     func reduce(bank: Bank, to: String) -> Money {
-        let amount: Int = augend.amount + added.amount
+        let amount: Int = augend.reduce(bank: bank, to: to).amount + added.reduce(bank: bank, to: to).amount
         return Money(amount: amount, currency: to)
     }
 }
