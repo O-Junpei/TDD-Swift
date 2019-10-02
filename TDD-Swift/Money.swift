@@ -23,11 +23,11 @@ class Money: Equatable, CustomStringConvertible, Expression {
         return Money(amount: amount, currency: "CHF")
     }
 
-    func times(_ multiplier: Int) -> Money {
+    func times(_ multiplier: Int) -> Expression {
         return Money(amount: amount * multiplier, currency: currency)
     }
     
-    func plus(added: Money) -> Expression {
+    func plus(added: Expression) -> Expression {
         return Sum(augend: self, added: added)
     }
     

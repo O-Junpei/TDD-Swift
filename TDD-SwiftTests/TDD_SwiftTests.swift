@@ -5,8 +5,10 @@ class TDD_SwiftTests: XCTestCase {
 
     func testMultiplication() {
         let five: Money = Money.dollar(amount: 5)
-        XCTAssertEqual(Money.dollar(amount: 10), five.times(2))
-        XCTAssertEqual(Money.dollar(amount: 15), five.times(3))
+        // XCTAssertEqual(Money.dollar(amount: 10), five.times(2))
+        XCTAssertEqual(Money.dollar(amount: 10), five.times(2).reduce(bank: Bank(), to: "USD"))
+        // XCTAssertEqual(Money.dollar(amount: 15), five.times(3))
+        XCTAssertEqual(Money.dollar(amount: 15), five.times(3).reduce(bank: Bank(), to: "USD"))
     }
     
     func testEquality() {
@@ -17,8 +19,8 @@ class TDD_SwiftTests: XCTestCase {
     
     func testFrancMultiplication() {
         let five: Money = Money.franc(amount: 5)
-        XCTAssertEqual(Money.franc(amount: 10), five.times(2))
-        XCTAssertEqual(Money.franc(amount: 15), five.times(3))
+        // XCTAssertEqual(Money.franc(amount: 15), five.times(3))
+        XCTAssertEqual(Money.franc(amount: 10), five.times(2).reduce(bank: Bank(), to: "CHF"))
     }
     
     func testCurrency() {
@@ -38,8 +40,8 @@ class TDD_SwiftTests: XCTestCase {
         let five: Money = Money.dollar(amount: 5)
         let result: Expression = five.plus(added: five)
         let sum: Sum = result as! Sum
-        XCTAssertEqual(five, sum.added)
-        XCTAssertEqual(five, sum.added)
+        // XCTAssertEqual(five, sum.added)
+        XCTAssertEqual(five, sum.added.reduce(bank: Bank(), to: "USD"))
     }
     
     func testReduceSum() {
