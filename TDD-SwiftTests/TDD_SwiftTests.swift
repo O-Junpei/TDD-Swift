@@ -30,7 +30,7 @@ class TDD_SwiftTests: XCTestCase {
     
     func testSimpleAdditon() {
         let five: Money = Money.dollar(amount: 5)
-        let sum: Expression = five.plus(added: five)
+        let sum: Expression = five.plus(expression: five)
         let bank: Bank = Bank()
         let reduced: Money = bank.reduce(source: sum, to: "USD")
         XCTAssertEqual(Money.dollar(amount: 10), reduced)
@@ -38,7 +38,7 @@ class TDD_SwiftTests: XCTestCase {
     
     func testPlusReturnSum() {
         let five: Money = Money.dollar(amount: 5)
-        let result: Expression = five.plus(added: five)
+        let result: Expression = five.plus(expression: five)
         let sum: Sum = result as! Sum
         // XCTAssertEqual(five, sum.added)
         XCTAssertEqual(five, sum.added.reduce(bank: Bank(), to: "USD"))
@@ -69,11 +69,11 @@ class TDD_SwiftTests: XCTestCase {
     }
     
     func testMixedAddition() {
-        let fiveBucks: Money = Money.dollar(amount: 5)
-        let tenFrancs: Money = Money.franc(amount: 10)
+        let fiveBucks: Expression = Money.dollar(amount: 5)
+        let tenFrancs: Expression = Money.franc(amount: 10)
         let bank: Bank = Bank()
         bank.addRate(from: "CHF", to: "USD", rate: 2)
-        let result: Money = bank.reduce(source: fiveBucks.plus(added: tenFrancs), to: "USD")
+        let result: Money = bank.reduce(source: fiveBucks.plus(expression: tenFrancs), to: "USD")
         XCTAssertEqual(Money.dollar(amount: 10), result)
     }
 }

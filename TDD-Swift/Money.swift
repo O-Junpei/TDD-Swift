@@ -27,7 +27,7 @@ class Money: Equatable, CustomStringConvertible, Expression {
         return Money(amount: amount * multiplier, currency: currency)
     }
     
-    func plus(added: Expression) -> Expression {
+    func plus(expression added: Expression) -> Expression {
         return Sum(augend: self, added: added)
     }
     
