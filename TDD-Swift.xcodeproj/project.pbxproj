@@ -39,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1704428D234D7E1A00C83851 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		177BCE67233B077A00CE37C0 /* Pair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pair.swift; sourceTree = "<group>"; };
 		178F6E0722DEC0AF0051FB24 /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
 		1791C3022331CBF800425BF8 /* Sum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sum.swift; sourceTree = "<group>"; };
@@ -118,6 +119,7 @@
 				17EB3D0C231F583600F8AB30 /* Expression.swift */,
 				1791C3022331CBF800425BF8 /* Sum.swift */,
 				177BCE67233B077A00CE37C0 /* Pair.swift */,
+				1704428D234D7E1A00C83851 /* README.md */,
 			);
 			path = "TDD-Swift";
 			sourceTree = "<group>";
