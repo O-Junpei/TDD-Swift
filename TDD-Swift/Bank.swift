@@ -1,7 +1,6 @@
-import UIKit
-
 class Bank {
     private var rates: [Pair: Int] = [:]
+
     func reduce(source: Expression, to: String) -> Money {
         return source.reduce(bank: self, to: to)
     }

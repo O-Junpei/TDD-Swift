@@ -242,6 +242,78 @@ class TDD_SwiftTests: XCTestCase {
 - 5 CHF * 2 = 10 CHF
 
 
+
+``` Dollar.swift
+import Foundation
+
+class Dollar: Equatable {
+    var amount: Int
+
+    init(amount: Int) {
+        self.amount = amount
+    }
+
+    func times(multiplier: Int) -> Dollar {
+        return Dollar(amount: amount * multiplier)
+    }
+
+    static func == (lhs: Dollar, rhs: Dollar) -> Bool {
+        lhs.amount == rhs.amount
+    }
+}
+```
+
+``` Franc.swift
+import Foundation
+
+class Franc: Equatable {
+    var amount: Int
+
+    init(amount: Int) {
+        self.amount = amount
+    }
+
+    func times(multiplier: Int) -> Franc {
+        return Franc(amount: amount * multiplier)
+    }
+
+    static func == (lhs: Franc, rhs: Franc) -> Bool {
+        lhs.amount == rhs.amount
+    }
+}
+```
+
+
+``` TDD_SwiftTests.swift
+import XCTest
+@testable import TDD_Swift
+
+class TDD_SwiftTests: XCTestCase {
+
+    func testMultiplication() {
+        let five: Dollar = Dollar(amount: 5)
+        XCTAssertEqual(Dollar(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Dollar(amount: 15), five.times(multiplier: 3))
+    }
+
+    func testFrancMultiplication() {
+        let five: Franc = Franc(amount: 5)
+        XCTAssertEqual(Franc(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Franc(amount: 15), five.times(multiplier: 3))
+    }
+
+    func testEquality() {
+        XCTAssertTrue(Dollar(amount: 5) == Dollar(amount: 5))
+        XCTAssertFalse(Dollar(amount: 5) == Dollar(amount: 6))
+    }
+}
+```
+
+
+
+
+
+
 # 第6章　テスト不足に気づいたら
 
 
@@ -259,6 +331,76 @@ class TDD_SwiftTests: XCTestCase {
 - DollarとFrancの重複
 - equalsの一般化
 - timesの一般化
+
+
+``` Money.swift
+class Money: Equatable {
+    let amount: Int
+
+    init(amount: Int) {
+        self.amount = amount
+    }
+
+    static func == (lhs: Money, rhs: Money) -> Bool {
+        lhs.amount == rhs.amount
+    }
+}
+```
+
+
+
+``` Dollar.swift
+class Dollar: Money {
+    override init(amount: Int) {
+        super.init(amount: amount)
+    }
+
+    func times(multiplier: Int) -> Dollar {
+        return Dollar(amount: amount * multiplier)
+    }
+}
+```
+
+``` Franc.swift
+class Franc: Money {
+
+    override init(amount: Int) {
+        super.init(amount: amount)
+    }
+
+    func times(multiplier: Int) -> Franc {
+        return Franc(amount: amount * multiplier)
+    }
+}
+```
+
+
+``` TDD_SwiftTests.swift
+import XCTest
+@testable import TDD_Swift
+
+class TDD_SwiftTests: XCTestCase {
+
+    func testMultiplication() {
+        let five: Dollar = Dollar(amount: 5)
+        XCTAssertEqual(Dollar(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Dollar(amount: 15), five.times(multiplier: 3))
+    }
+
+    func testFrancMultiplication() {
+        let five: Franc = Franc(amount: 5)
+        XCTAssertEqual(Franc(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Franc(amount: 15), five.times(multiplier: 3))
+    }
+
+    func testEquality() {
+        XCTAssertTrue(Dollar(amount: 5) == Dollar(amount: 5))
+        XCTAssertFalse(Dollar(amount: 5) == Dollar(amount: 6))
+        XCTAssertTrue(Franc(amount: 5) == Franc(amount: 5))
+        XCTAssertFalse(Franc(amount: 5) == Franc(amount: 6))
+    }
+}
+```
 
 
 
@@ -279,6 +421,82 @@ class TDD_SwiftTests: XCTestCase {
 - equalsの一般化
 - timesの一般化
 - FrancとDollarを比較する
+
+
+
+
+``` Money.swift
+class Money: Equatable {
+    let amount: Int
+
+    init(amount: Int) {
+        self.amount = amount
+    }
+
+    static func == (lhs: Money, rhs: Money) -> Bool {
+        return lhs.amount == rhs.amount && String(describing: type(of: lhs)) == String(describing: type(of: rhs))
+    }
+}
+```
+
+
+
+``` Dollar.swift
+class Dollar: Money {
+    override init(amount: Int) {
+        super.init(amount: amount)
+    }
+
+    func times(multiplier: Int) -> Dollar {
+        return Dollar(amount: amount * multiplier)
+    }
+}
+```
+
+``` Franc.swift
+class Franc: Money {
+
+    override init(amount: Int) {
+        super.init(amount: amount)
+    }
+
+    func times(multiplier: Int) -> Franc {
+        return Franc(amount: amount * multiplier)
+    }
+}
+```
+
+
+``` TDD_SwiftTests.swift
+import XCTest
+@testable import TDD_Swift
+
+class TDD_SwiftTests: XCTestCase {
+
+    func testMultiplication() {
+        let five: Dollar = Dollar(amount: 5)
+        XCTAssertEqual(Dollar(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Dollar(amount: 15), five.times(multiplier: 3))
+    }
+
+    func testFrancMultiplication() {
+        let five: Franc = Franc(amount: 5)
+        XCTAssertEqual(Franc(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Franc(amount: 15), five.times(multiplier: 3))
+    }
+
+    func testEquality() {
+        XCTAssertTrue(Dollar(amount: 5) == Dollar(amount: 5))
+        XCTAssertFalse(Dollar(amount: 5) == Dollar(amount: 6))
+        XCTAssertTrue(Franc(amount: 5) == Franc(amount: 5))
+        XCTAssertFalse(Franc(amount: 5) == Franc(amount: 6))
+        XCTAssertFalse(Franc(amount: 5) == Dollar(amount: 5))
+    }
+}
+```
+
+
+
 
 
 # 第8章　実装を隠す
@@ -302,6 +520,92 @@ class TDD_SwiftTests: XCTestCase {
 
 
 
+``` Money.swift
+class Money: Equatable {
+    let amount: Int
+
+    init(amount: Int) {
+        self.amount = amount
+    }
+
+    static func == (lhs: Money, rhs: Money) -> Bool {
+        return lhs.amount == rhs.amount && String(describing: type(of: lhs)) == String(describing: type(of: rhs))
+    }
+
+    static func dollar(amount: Int) -> Money {
+        return Dollar(amount: amount)
+    }
+
+    static func franc(amount: Int) -> Money {
+        return Franc(amount: amount)
+    }
+
+    func times(multiplier: Int) -> Money {
+        fatalError()
+    }
+}
+```
+
+
+
+``` Dollar.swift
+class Dollar: Money {
+    override init(amount: Int) {
+        super.init(amount: amount)
+    }
+
+    override func times(multiplier: Int) -> Money {
+        return Dollar(amount: amount * multiplier)
+    }
+}
+```
+
+``` Franc.swift
+class Franc: Money {
+
+    override init(amount: Int) {
+        super.init(amount: amount)
+    }
+
+    override func times(multiplier: Int) -> Money {
+        return Franc(amount: amount * multiplier)
+    }
+}
+```
+
+
+``` TDD_SwiftTests.swift
+import XCTest
+@testable import TDD_Swift
+
+class TDD_SwiftTests: XCTestCase {
+
+    func testMultiplication() {
+        let five: Money = Money.dollar(amount: 5)
+        XCTAssertEqual(Money.dollar(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Money.dollar(amount: 15), five.times(multiplier: 3))
+    }
+
+    func testFrancMultiplication() {
+        let five: Money = Money.franc(amount: 5)
+        XCTAssertEqual(Money.franc(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Money.franc(amount: 15), five.times(multiplier: 3))
+    }
+
+    func testEquality() {
+        XCTAssertTrue(Money.dollar(amount: 5) == Money.dollar(amount: 5))
+        XCTAssertFalse(Money.dollar(amount: 5) == Money.dollar(amount: 6))
+        XCTAssertTrue(Money.franc(amount: 5) == Money.franc(amount: 5))
+        XCTAssertFalse(Money.franc(amount: 5) == Money.franc(amount: 6))
+        XCTAssertFalse(Money.franc(amount: 5) == Money.dollar(amount: 5))
+    }
+}
+```
+
+
+
+
+
 # 第9章　歩幅の調整
 
 ### TODOリスト
@@ -321,6 +625,94 @@ class TDD_SwiftTests: XCTestCase {
 - ~~FrancとDollarを比較する~~
 - 通過の概念
 - testFrancMultiplicationを削除する
+
+
+``` Money.swift
+class Money: Equatable {
+    let amount: Int
+    let currency: String
+
+    init(amount: Int, currency: String) {
+        self.amount = amount
+        self.currency = currency
+    }
+
+    static func == (lhs: Money, rhs: Money) -> Bool {
+        return lhs.amount == rhs.amount && String(describing: type(of: lhs)) == String(describing: type(of: rhs))
+    }
+
+    static func dollar(amount: Int) -> Money {
+        return Dollar(amount: amount, currency: "USD")
+    }
+
+    static func franc(amount: Int) -> Money {
+        return Franc(amount: amount, currency: "CHF")
+    }
+
+    func times(multiplier: Int) -> Money {
+        fatalError("Must be overridden")
+    }
+}
+```
+
+
+
+``` Dollar.swift
+class Dollar: Money {
+    override init(amount: Int, currency: String) {
+        super.init(amount: amount, currency: currency)
+    }
+
+    override func times(multiplier: Int) -> Money {
+        return Money.dollar(amount: amount * multiplier)
+    }
+}
+```
+
+``` Franc.swift
+class Franc: Money {
+    override init(amount: Int, currency: String) {
+        super.init(amount: amount, currency: currency)
+    }
+
+    override func times(multiplier: Int) -> Money {
+        return Money.franc(amount: amount * multiplier)
+    }
+}
+```
+
+
+``` TDD_SwiftTests.swift
+import XCTest
+@testable import TDD_Swift
+
+class TDD_SwiftTests: XCTestCase {
+    func testMultiplication() {
+        let five: Money = Money.dollar(amount: 5)
+        XCTAssertEqual(Money.dollar(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Money.dollar(amount: 15), five.times(multiplier: 3))
+    }
+
+    func testFrancMultiplication() {
+        let five: Money = Money.franc(amount: 5)
+        XCTAssertEqual(Money.franc(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Money.franc(amount: 15), five.times(multiplier: 3))
+    }
+
+    func testEquality() {
+        XCTAssertTrue(Money.dollar(amount: 5) == Money.dollar(amount: 5))
+        XCTAssertFalse(Money.dollar(amount: 5) == Money.dollar(amount: 6))
+        XCTAssertTrue(Money.franc(amount: 5) == Money.franc(amount: 5))
+        XCTAssertFalse(Money.franc(amount: 5) == Money.franc(amount: 6))
+        XCTAssertFalse(Money.franc(amount: 5) == Money.dollar(amount: 5))
+    }
+
+    func testCurrency() {
+        XCTAssertEqual("USD", Money.dollar(amount: 1).currency)
+        XCTAssertEqual("CHF", Money.franc(amount: 1).currency)
+    }
+}
+```
 
 
 
@@ -346,6 +738,103 @@ class TDD_SwiftTests: XCTestCase {
 - testFrancMultiplicationを削除する
 
 
+
+
+
+``` Money.swift
+class Money: Equatable, CustomStringConvertible {
+    let amount: Int
+    let currency: String
+
+    init(amount: Int, currency: String) {
+        self.amount = amount
+        self.currency = currency
+    }
+
+    var description: String {
+        return "\(amount) \(currency.description))"
+    }
+
+    static func == (lhs: Money, rhs: Money) -> Bool {
+        return lhs.amount == rhs.amount && lhs.currency == rhs.currency
+    }
+
+    static func dollar(amount: Int) -> Money {
+        return Dollar(amount: amount, currency: "USD")
+    }
+
+    static func franc(amount: Int) -> Money {
+        return Franc(amount: amount, currency: "CHF")
+    }
+
+    func times(multiplier: Int) -> Money {
+        return Money(amount: amount * multiplier, currency: currency)
+    }
+}
+```
+
+
+
+``` Dollar.swift
+class Dollar: Money {
+    override init(amount: Int, currency: String) {
+        super.init(amount: amount, currency: currency)
+    }
+}
+```
+
+``` Franc.swift
+class Franc: Money {
+    override init(amount: Int, currency: String) {
+        super.init(amount: amount, currency: currency)
+    }
+}
+```
+
+
+``` TDD_SwiftTests.swift
+import XCTest
+@testable import TDD_Swift
+
+class TDD_SwiftTests: XCTestCase {
+    func testMultiplication() {
+        let five: Money = Money.dollar(amount: 5)
+        XCTAssertEqual(Money.dollar(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Money.dollar(amount: 15), five.times(multiplier: 3))
+    }
+
+    func testFrancMultiplication() {
+        let five: Money = Money.franc(amount: 5)
+        XCTAssertEqual(Money.franc(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Money.franc(amount: 15), five.times(multiplier: 3))
+    }
+
+    func testEquality() {
+        XCTAssertTrue(Money.dollar(amount: 5) == Money.dollar(amount: 5))
+        XCTAssertFalse(Money.dollar(amount: 5) == Money.dollar(amount: 6))
+        XCTAssertTrue(Money.franc(amount: 5) == Money.franc(amount: 5))
+        XCTAssertFalse(Money.franc(amount: 5) == Money.franc(amount: 6))
+        XCTAssertFalse(Money.franc(amount: 5) == Money.dollar(amount: 5))
+    }
+
+    func testCurrency() {
+        XCTAssertEqual("USD", Money.dollar(amount: 1).currency)
+        XCTAssertEqual("CHF", Money.franc(amount: 1).currency)
+    }
+
+    func testDifferentClassEquality() {
+        XCTAssertTrue(Money(amount: 10, currency: "CHF") == Franc(amount: 10, currency: "CHF"))
+    }
+}
+```
+
+
+
+
+
+
+
+
 # 第11章　不要になったら消す
 
 
@@ -368,12 +857,165 @@ class TDD_SwiftTests: XCTestCase {
 - testFrancMultiplicationを削除する
 
 
+
+
+
+
+
+``` Money.swift
+class Money: Equatable, CustomStringConvertible {
+    let amount: Int
+    let currency: String
+
+    init(amount: Int, currency: String) {
+        self.amount = amount
+        self.currency = currency
+    }
+
+    var description: String {
+        return "\(amount) \(currency.description))"
+    }
+
+    static func == (lhs: Money, rhs: Money) -> Bool {
+        return lhs.amount == rhs.amount && lhs.currency == rhs.currency
+    }
+
+    static func dollar(amount: Int) -> Money {
+        return Money(amount: amount, currency: "USD")
+    }
+
+    static func franc(amount: Int) -> Money {
+        return Money(amount: amount, currency: "CHF")
+    }
+
+    func times(multiplier: Int) -> Money {
+        return Money(amount: amount * multiplier, currency: currency)
+    }
+}
+```
+
+
+
+
+``` TDD_SwiftTests.swift
+import XCTest
+@testable import TDD_Swift
+
+class TDD_SwiftTests: XCTestCase {
+    func testMultiplication() {
+        let five: Money = Money.dollar(amount: 5)
+        XCTAssertEqual(Money.dollar(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Money.dollar(amount: 15), five.times(multiplier: 3))
+    }
+
+    func testEquality() {
+        XCTAssertTrue(Money.dollar(amount: 5) == Money.dollar(amount: 5))
+        XCTAssertFalse(Money.dollar(amount: 5) == Money.dollar(amount: 6))
+        XCTAssertFalse(Money.franc(amount: 5) == Money.dollar(amount: 5))
+    }
+
+    func testCurrency() {
+        XCTAssertEqual("USD", Money.dollar(amount: 1).currency)
+        XCTAssertEqual("CHF", Money.franc(amount: 1).currency)
+    }
+}
+```
+
+
+
+
+
+
+
+
+
 # 第12章　設計とメタファー
 
 
 ### TODOリスト
 - $5 + 10CHF = $10（レートが2:1の場合）
 - $5 + $5 = $10
+
+
+
+
+
+``` Money.swift
+class Money: Equatable, CustomStringConvertible, Expression {
+    let amount: Int
+    let currency: String
+
+    init(amount: Int, currency: String) {
+        self.amount = amount
+        self.currency = currency
+    }
+
+    var description: String {
+        return "\(amount) \(currency.description))"
+    }
+
+    static func == (lhs: Money, rhs: Money) -> Bool {
+        return lhs.amount == rhs.amount && lhs.currency == rhs.currency
+    }
+
+    static func dollar(amount: Int) -> Money {
+        return Money(amount: amount, currency: "USD")
+    }
+
+    static func franc(amount: Int) -> Money {
+        return Money(amount: amount, currency: "CHF")
+    }
+
+    func times(multiplier: Int) -> Money {
+        return Money(amount: amount * multiplier, currency: currency)
+    }
+
+    func plus(addend: Money) -> Expression {
+        return Money(amount: amount + addend.amount, currency: currency)
+    }
+}
+```
+
+``` Expression.swift
+protocol Expression {
+}
+```
+
+``` Bank.swift
+class Bank {
+    func reduce(source: Expression, to: String) -> Money {
+        return Money.dollar(amount: 10)
+    }
+}
+```
+
+``` TDD_SwiftTests.swift
+import XCTest
+@testable import TDD_Swift
+
+class TDD_SwiftTests: XCTestCase {
+    func testMultiplication() {
+        let five: Money = Money.dollar(amount: 5)
+        XCTAssertEqual(Money.dollar(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Money.dollar(amount: 15), five.times(multiplier: 3))
+    }
+
+    func testEquality() {
+        XCTAssertTrue(Money.dollar(amount: 5) == Money.dollar(amount: 5))
+        XCTAssertFalse(Money.dollar(amount: 5) == Money.dollar(amount: 6))
+        XCTAssertFalse(Money.franc(amount: 5) == Money.dollar(amount: 5))
+    }
+
+    func testCurrency() {
+        XCTAssertEqual("USD", Money.dollar(amount: 1).currency)
+        XCTAssertEqual("CHF", Money.franc(amount: 1).currency)
+    }
+}
+```
+
+
+
+
 
 
 
@@ -384,11 +1026,334 @@ class TDD_SwiftTests: XCTestCase {
 - $5 + $5 = $10
 
 
+```
+if let money = source as? Money {
+    return money
+}
+```
+
+
+
+
+
+
+
+
+``` Money.swift
+class Money: Equatable, CustomStringConvertible, Expression {
+    let amount: Int
+    let currency: String
+
+    init(amount: Int, currency: String) {
+        self.amount = amount
+        self.currency = currency
+    }
+
+    var description: String {
+        return "\(amount) \(currency.description))"
+    }
+
+    static func == (lhs: Money, rhs: Money) -> Bool {
+        return lhs.amount == rhs.amount && lhs.currency == rhs.currency
+    }
+
+    static func dollar(amount: Int) -> Money {
+        return Money(amount: amount, currency: "USD")
+    }
+
+    static func franc(amount: Int) -> Money {
+        return Money(amount: amount, currency: "CHF")
+    }
+
+    func times(multiplier: Int) -> Money {
+        return Money(amount: amount * multiplier, currency: currency)
+    }
+
+    func plus(addend: Money) -> Expression {
+        return Sum(augend: self, addend: addend)
+    }
+
+    func reduce(to: String)-> Money {
+        return self
+    }
+}
+```
+
+``` Sum.swift
+class Sum: Expression {
+    let augend: Money
+    let addend: Money
+
+    init(augend: Money, addend: Money) {
+        self.augend = augend
+        self.addend = addend
+    }
+
+    func reduce(to: String) -> Money {
+        let amount: Int = augend.amount + addend.amount
+        return Money(amount: amount, currency: to)
+    }
+}
+```
+
+``` Expression.swift
+protocol Expression {
+    func reduce(to: String) -> Money
+}
+```
+
+``` Bank.swift
+class Bank {
+    func reduce(source: Expression, to: String) -> Money {
+        return source.reduce(to: to)
+    }
+}
+```
+
+``` TDD_SwiftTests.swift
+import XCTest
+@testable import TDD_Swift
+
+class TDD_SwiftTests: XCTestCase {
+    func testMultiplication() {
+        let five: Money = Money.dollar(amount: 5)
+        XCTAssertEqual(Money.dollar(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Money.dollar(amount: 15), five.times(multiplier: 3))
+    }
+
+    func testEquality() {
+        XCTAssertTrue(Money.dollar(amount: 5) == Money.dollar(amount: 5))
+        XCTAssertFalse(Money.dollar(amount: 5) == Money.dollar(amount: 6))
+        XCTAssertFalse(Money.franc(amount: 5) == Money.dollar(amount: 5))
+    }
+
+    func testCurrency() {
+        XCTAssertEqual("USD", Money.dollar(amount: 1).currency)
+        XCTAssertEqual("CHF", Money.franc(amount: 1).currency)
+    }
+
+    func testSimpleAddition() {
+        let five: Money = Money.dollar(amount: 5)
+        let sum: Expression = five.plus(addend: five)
+        let bank: Bank = Bank()
+        let reduced: Money = bank.reduce(source: sum, to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 10), reduced)
+    }
+
+    func testPlusReturnSum() {
+        let five: Money = Money.dollar(amount: 5)
+        let result: Expression = five.plus(addend: five)
+        let sum: Sum = result as! Sum
+        XCTAssertEqual(five, sum.addend)
+    }
+
+    func testResuceSum() {
+        let sum: Expression = Sum(augend: Money.dollar(amount: 3), addend: Money.dollar(amount: 4))
+        let bank: Bank = Bank()
+        let result: Money = bank.reduce(source: sum, to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 7), result)
+    }
+
+    func testReduceMoney() {
+        let bank: Bank = Bank()
+        let result: Money = bank.reduce(source: Money.dollar(amount: 1), to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 1), result)
+    }
+}
+```
+
+
+
+
+
+
+
+
 # 第14章　学習用テストと回帰テスト
 
 ### TODOリスト
 - $5 + 10CHF = $10（レートが2:1の場合）
 - $5 + $5 = $10
+
+
+
+
+``` Money.swift
+class Money: Equatable, CustomStringConvertible, Expression {
+    let amount: Int
+    let currency: String
+
+    init(amount: Int, currency: String) {
+        self.amount = amount
+        self.currency = currency
+    }
+
+    var description: String {
+        return "\(amount) \(currency.description))"
+    }
+
+    static func == (lhs: Money, rhs: Money) -> Bool {
+        return lhs.amount == rhs.amount && lhs.currency == rhs.currency
+    }
+
+    static func dollar(amount: Int) -> Money {
+        return Money(amount: amount, currency: "USD")
+    }
+
+    static func franc(amount: Int) -> Money {
+        return Money(amount: amount, currency: "CHF")
+    }
+
+    func times(multiplier: Int) -> Money {
+        return Money(amount: amount * multiplier, currency: currency)
+    }
+
+    func plus(addend: Money) -> Expression {
+        return Sum(augend: self, addend: addend)
+    }
+
+    func reduce(bank: Bank, to: String)-> Money {
+        let rate: Int = bank.rate(from: currency, to: to)
+        return Money(amount: amount / rate, currency: to)
+    }
+}
+```
+
+``` Sum.swift
+class Sum: Expression {
+    let augend: Money
+    let addend: Money
+
+    init(augend: Money, addend: Money) {
+        self.augend = augend
+        self.addend = addend
+    }
+
+    func reduce(bank:Bank, to: String) -> Money {
+        let amount: Int = augend.amount + addend.amount
+        return Money(amount: amount, currency: to)
+    }
+}
+```
+
+``` Expression.swift
+protocol Expression {
+    func reduce(bank: Bank, to: String) -> Money
+}
+```
+
+``` Bank.swift
+class Bank {
+    private var rates: [Pair: Int] = [:]
+
+    func reduce(source: Expression, to: String) -> Money {
+        return source.reduce(bank: self, to: to)
+    }
+
+    func addRate(from: String, to: String, rate: Int) {
+        rates[Pair(from: from, to: to)] = rate
+    }
+
+    func rate(from: String, to: String) -> Int {
+        if from == to {
+            return 1
+        }
+
+        guard let rate = rates[Pair(from: from, to: to)] else {
+            fatalError("未対応の通過です")
+        }
+        return rate
+    }
+}
+```
+
+```Pair.swift
+class Pair: Hashable {
+    private let from: String
+    private let to: String
+
+    init(from: String, to: String) {
+        self.from = from
+        self.to = to
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(from)
+        hasher.combine(to)
+    }
+
+    static func == (lhs: Pair, rhs: Pair) -> Bool {
+        return lhs.from == rhs.from && lhs.to == rhs.to
+    }
+}
+```
+
+
+``` TDD_SwiftTests.swift
+import XCTest
+@testable import TDD_Swift
+
+class TDD_SwiftTests: XCTestCase {
+    func testMultiplication() {
+        let five: Money = Money.dollar(amount: 5)
+        XCTAssertEqual(Money.dollar(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Money.dollar(amount: 15), five.times(multiplier: 3))
+    }
+
+    func testEquality() {
+        XCTAssertTrue(Money.dollar(amount: 5) == Money.dollar(amount: 5))
+        XCTAssertFalse(Money.dollar(amount: 5) == Money.dollar(amount: 6))
+        XCTAssertFalse(Money.franc(amount: 5) == Money.dollar(amount: 5))
+    }
+
+    func testCurrency() {
+        XCTAssertEqual("USD", Money.dollar(amount: 1).currency)
+        XCTAssertEqual("CHF", Money.franc(amount: 1).currency)
+    }
+
+    func testSimpleAddition() {
+        let five: Money = Money.dollar(amount: 5)
+        let sum: Expression = five.plus(addend: five)
+        let bank: Bank = Bank()
+        let reduced: Money = bank.reduce(source: sum, to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 10), reduced)
+    }
+
+    func testPlusReturnSum() {
+        let five: Money = Money.dollar(amount: 5)
+        let result: Expression = five.plus(addend: five)
+        let sum: Sum = result as! Sum
+        XCTAssertEqual(five, sum.addend)
+    }
+
+    func testResuceSum() {
+        let sum: Expression = Sum(augend: Money.dollar(amount: 3), addend: Money.dollar(amount: 4))
+        let bank: Bank = Bank()
+        let result: Money = bank.reduce(source: sum, to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 7), result)
+    }
+
+    func testReduceMoney() {
+        let bank: Bank = Bank()
+        let result: Money = bank.reduce(source: Money.dollar(amount: 1), to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 1), result)
+    }
+
+    func testReduceMoneyDifferentCurrency() {
+        let bank: Bank = Bank()
+        bank.addRate(from: "CHF", to: "USD", rate: 2)
+        let result: Money = bank.reduce(source: Money.franc(amount: 2), to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 1), result)
+    }
+
+    func testIdentityRate() {
+        XCTAssertEqual(1, Bank().rate(from: "USD", to: "USD"))
+    }
+}
+```
+
+
+
 
 
 
@@ -401,6 +1366,205 @@ class TDD_SwiftTests: XCTestCase {
 - Bank.reduce(Money)
 - Moneyを変換して換算を行う
 - Reduce(Bank, String)
+
+
+`Protocol type 'Expression' cannot conform to 'Equatable' because only concrete types can conform to protocols` って怒られた。
+
+
+
+``` Money.swift
+class Money: Equatable, CustomStringConvertible, Expression {
+    let amount: Int
+    let currency: String
+
+    init(amount: Int, currency: String) {
+        self.amount = amount
+        self.currency = currency
+    }
+
+    var description: String {
+        return "\(amount) \(currency.description))"
+    }
+
+    static func == (lhs: Money, rhs: Money) -> Bool {
+        return lhs.amount == rhs.amount && lhs.currency == rhs.currency
+    }
+
+    static func dollar(amount: Int) -> Money {
+        return Money(amount: amount, currency: "USD")
+    }
+
+    static func franc(amount: Int) -> Money {
+        return Money(amount: amount, currency: "CHF")
+    }
+
+    func times(multiplier: Int) -> Expression {
+        return Money(amount: amount * multiplier, currency: currency)
+    }
+
+    func plus(addend: Expression) -> Expression {
+        return Sum(augend: self, addend: addend)
+    }
+
+    func reduce(bank: Bank, to: String)-> Money {
+        let rate: Int = bank.rate(from: currency, to: to)
+        return Money(amount: amount / rate, currency: to)
+    }
+}
+```
+
+``` Sum.swift
+class Sum: Expression {
+    let augend: Expression
+    let addend: Expression
+
+    init(augend: Expression, addend: Expression) {
+        self.augend = augend
+        self.addend = addend
+    }
+
+    func plus(addend: Expression) -> Expression {
+        fatalError()
+    }
+
+    func reduce(bank: Bank, to: String) -> Money {
+        let amount: Int = augend.reduce(bank: bank, to: to).amount + addend.reduce(bank: bank, to: to).amount
+        return Money(amount: amount, currency: to)
+    }
+}
+```
+
+``` Expression.swift
+protocol Expression {
+    func plus(addend: Expression) -> Expression
+    func reduce(bank: Bank, to: String) -> Money
+}
+```
+
+``` Bank.swift
+class Bank {
+    private var rates: [Pair: Int] = [:]
+
+    func reduce(source: Expression, to: String) -> Money {
+        return source.reduce(bank: self, to: to)
+    }
+
+    func addRate(from: String, to: String, rate: Int) {
+        rates[Pair(from: from, to: to)] = rate
+    }
+
+    func rate(from: String, to: String) -> Int {
+        if from == to {
+            return 1
+        }
+
+        guard let rate = rates[Pair(from: from, to: to)] else {
+            fatalError("未対応の通過です")
+        }
+        return rate
+    }
+}
+```
+
+```Pair.swift
+class Pair: Hashable {
+    private let from: String
+    private let to: String
+
+    init(from: String, to: String) {
+        self.from = from
+        self.to = to
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(from)
+        hasher.combine(to)
+    }
+
+    static func == (lhs: Pair, rhs: Pair) -> Bool {
+        return lhs.from == rhs.from && lhs.to == rhs.to
+    }
+}
+```
+
+
+``` TDD_SwiftTests.swift
+import XCTest
+@testable import TDD_Swift
+
+class TDD_SwiftTests: XCTestCase {
+    func testMultiplication() {
+        let five: Money = Money.dollar(amount: 5)
+        // XCTAssertEqual(Money.dollar(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Money.dollar(amount: 10), five.times(multiplier: 2).reduce(bank: Bank(), to: "USD"))
+        // XCTAssertEqual(Money.dollar(amount: 15), five.times(multiplier: 3))
+        XCTAssertEqual(Money.dollar(amount: 15), five.times(multiplier: 3).reduce(bank: Bank(), to: "USD"))
+    }
+
+    func testEquality() {
+        XCTAssertTrue(Money.dollar(amount: 5) == Money.dollar(amount: 5))
+        XCTAssertFalse(Money.dollar(amount: 5) == Money.dollar(amount: 6))
+        XCTAssertFalse(Money.franc(amount: 5) == Money.dollar(amount: 5))
+    }
+
+    func testCurrency() {
+        XCTAssertEqual("USD", Money.dollar(amount: 1).currency)
+        XCTAssertEqual("CHF", Money.franc(amount: 1).currency)
+    }
+
+    func testSimpleAddition() {
+        let five: Money = Money.dollar(amount: 5)
+        let sum: Expression = five.plus(addend: five)
+        let bank: Bank = Bank()
+        let reduced: Money = bank.reduce(source: sum, to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 10), reduced)
+    }
+
+    func testPlusReturnSum() {
+        let five: Money = Money.dollar(amount: 5)
+        let result: Expression = five.plus(addend: five)
+        let sum: Sum = result as! Sum
+        // XCTAssertEqual(five, sum.added)
+        XCTAssertEqual(five, sum.addend.reduce(bank: Bank(), to: "USD"))
+    }
+
+    func testResuceSum() {
+        let sum: Expression = Sum(augend: Money.dollar(amount: 3), addend: Money.dollar(amount: 4))
+        let bank: Bank = Bank()
+        let result: Money = bank.reduce(source: sum, to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 7), result)
+    }
+
+    func testReduceMoney() {
+        let bank: Bank = Bank()
+        let result: Money = bank.reduce(source: Money.dollar(amount: 1), to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 1), result)
+    }
+
+    func testReduceMoneyDifferentCurrency() {
+        let bank: Bank = Bank()
+        bank.addRate(from: "CHF", to: "USD", rate: 2)
+        let result: Money = bank.reduce(source: Money.franc(amount: 2), to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 1), result)
+    }
+
+    func testIdentityRate() {
+        XCTAssertEqual(1, Bank().rate(from: "USD", to: "USD"))
+    }
+
+    func testMixedAddition() {
+        let fiveBucks: Expression = Money.dollar(amount: 5)
+        let tenFrancs: Expression = Money.franc(amount: 10)
+        let bank: Bank = Bank()
+        bank.addRate(from: "CHF", to: "USD", rate: 2)
+        let result: Money = bank.reduce(source: fiveBucks.plus(addend: tenFrancs), to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 10), result)
+    }
+}
+```
+
+
+
 
 
 
@@ -416,6 +1580,227 @@ class TDD_SwiftTests: XCTestCase {
 - ~~Reduce(Bank, String)~~
 - Sum.plus
 - Expression.times
+
+
+
+
+``` Money.swift
+class Money: Equatable, CustomStringConvertible, Expression {
+    let amount: Int
+    let currency: String
+
+    init(amount: Int, currency: String) {
+        self.amount = amount
+        self.currency = currency
+    }
+
+    var description: String {
+        return "\(amount) \(currency.description))"
+    }
+
+    static func == (lhs: Money, rhs: Money) -> Bool {
+        return lhs.amount == rhs.amount && lhs.currency == rhs.currency
+    }
+
+    static func dollar(amount: Int) -> Money {
+        return Money(amount: amount, currency: "USD")
+    }
+
+    static func franc(amount: Int) -> Money {
+        return Money(amount: amount, currency: "CHF")
+    }
+
+    func times(multiplier: Int) -> Expression {
+        return Money(amount: amount * multiplier, currency: currency)
+    }
+
+    func plus(addend: Expression) -> Expression {
+        return Sum(augend: self, addend: addend)
+    }
+
+    func reduce(bank: Bank, to: String)-> Money {
+        let rate: Int = bank.rate(from: currency, to: to)
+        return Money(amount: amount / rate, currency: to)
+    }
+}
+```
+
+``` Sum.swift
+class Sum: Expression {
+    let augend: Expression
+    let addend: Expression
+
+    init(augend: Expression, addend: Expression) {
+        self.augend = augend
+        self.addend = addend
+    }
+
+    func times(multiplier: Int) -> Expression {
+        return Sum(augend: augend.times(multiplier: multiplier), addend: addend.times(multiplier: multiplier))
+    }
+
+    func plus(addend: Expression) -> Expression {
+        return Sum(augend: self, addend: addend)
+    }
+
+    func reduce(bank: Bank, to: String) -> Money {
+        let amount: Int = augend.reduce(bank: bank, to: to).amount + addend.reduce(bank: bank, to: to).amount
+        return Money(amount: amount, currency: to)
+    }
+}
+```
+
+``` Expression.swift
+protocol Expression {
+    func times(multiplier: Int) -> Expression
+    func plus(addend: Expression) -> Expression
+    func reduce(bank: Bank, to: String) -> Money
+}
+```
+
+``` Bank.swift
+class Bank {
+    private var rates: [Pair: Int] = [:]
+
+    func reduce(source: Expression, to: String) -> Money {
+        return source.reduce(bank: self, to: to)
+    }
+
+    func addRate(from: String, to: String, rate: Int) {
+        rates[Pair(from: from, to: to)] = rate
+    }
+
+    func rate(from: String, to: String) -> Int {
+        if from == to {
+            return 1
+        }
+
+        guard let rate = rates[Pair(from: from, to: to)] else {
+            fatalError("未対応の通過です")
+        }
+        return rate
+    }
+}
+```
+
+```Pair.swift
+class Pair: Hashable {
+    private let from: String
+    private let to: String
+
+    init(from: String, to: String) {
+        self.from = from
+        self.to = to
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(from)
+        hasher.combine(to)
+    }
+
+    static func == (lhs: Pair, rhs: Pair) -> Bool {
+        return lhs.from == rhs.from && lhs.to == rhs.to
+    }
+}
+```
+
+
+``` TDD_SwiftTests.swift
+import XCTest
+@testable import TDD_Swift
+
+class TDD_SwiftTests: XCTestCase {
+    func testMultiplication() {
+        let five: Money = Money.dollar(amount: 5)
+        // XCTAssertEqual(Money.dollar(amount: 10), five.times(multiplier: 2))
+        XCTAssertEqual(Money.dollar(amount: 10), five.times(multiplier: 2).reduce(bank: Bank(), to: "USD"))
+        // XCTAssertEqual(Money.dollar(amount: 15), five.times(multiplier: 3))
+        XCTAssertEqual(Money.dollar(amount: 15), five.times(multiplier: 3).reduce(bank: Bank(), to: "USD"))
+    }
+
+    func testEquality() {
+        XCTAssertTrue(Money.dollar(amount: 5) == Money.dollar(amount: 5))
+        XCTAssertFalse(Money.dollar(amount: 5) == Money.dollar(amount: 6))
+        XCTAssertFalse(Money.franc(amount: 5) == Money.dollar(amount: 5))
+    }
+
+    func testCurrency() {
+        XCTAssertEqual("USD", Money.dollar(amount: 1).currency)
+        XCTAssertEqual("CHF", Money.franc(amount: 1).currency)
+    }
+
+    func testSimpleAddition() {
+        let five: Money = Money.dollar(amount: 5)
+        let sum: Expression = five.plus(addend: five)
+        let bank: Bank = Bank()
+        let reduced: Money = bank.reduce(source: sum, to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 10), reduced)
+    }
+
+    func testPlusReturnSum() {
+        let five: Money = Money.dollar(amount: 5)
+        let result: Expression = five.plus(addend: five)
+        let sum: Sum = result as! Sum
+        // XCTAssertEqual(five, sum.added)
+        XCTAssertEqual(five, sum.addend.reduce(bank: Bank(), to: "USD"))
+    }
+
+    func testResuceSum() {
+        let sum: Expression = Sum(augend: Money.dollar(amount: 3), addend: Money.dollar(amount: 4))
+        let bank: Bank = Bank()
+        let result: Money = bank.reduce(source: sum, to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 7), result)
+    }
+
+    func testReduceMoney() {
+        let bank: Bank = Bank()
+        let result: Money = bank.reduce(source: Money.dollar(amount: 1), to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 1), result)
+    }
+
+    func testReduceMoneyDifferentCurrency() {
+        let bank: Bank = Bank()
+        bank.addRate(from: "CHF", to: "USD", rate: 2)
+        let result: Money = bank.reduce(source: Money.franc(amount: 2), to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 1), result)
+    }
+
+    func testIdentityRate() {
+        XCTAssertEqual(1, Bank().rate(from: "USD", to: "USD"))
+    }
+
+    func testMixedAddition() {
+        let fiveBucks: Expression = Money.dollar(amount: 5)
+        let tenFrancs: Expression = Money.franc(amount: 10)
+        let bank: Bank = Bank()
+        bank.addRate(from: "CHF", to: "USD", rate: 2)
+        let result: Money = bank.reduce(source: fiveBucks.plus(addend: tenFrancs), to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 10), result)
+    }
+
+    func testSumPlusMoney() {
+        let fiveBucks: Expression = Money.dollar(amount: 5)
+        let tenFrancs: Expression = Money.franc(amount: 10)
+        let bank: Bank = Bank()
+        bank.addRate(from: "CHF", to: "USD", rate: 2)
+        let sum: Expression = Sum(augend: fiveBucks, addend: tenFrancs).plus(addend: fiveBucks)
+        let result = bank.reduce(source: sum, to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 15), result)
+    }
+
+    func testSumTimes() {
+        let fiveBucks: Expression = Money.dollar(amount: 5)
+        let tenFrancs: Expression = Money.franc(amount: 10)
+        let bank: Bank = Bank()
+        bank.addRate(from: "CHF", to: "USD", rate: 2)
+        let sum: Expression = Sum(augend: fiveBucks, addend: tenFrancs).times(multiplier: 2)
+        let result: Money = bank.reduce(source: sum, to: "USD")
+        XCTAssertEqual(Money.dollar(amount: 20), result)
+    }
+}
+```
+
+
 
 
 

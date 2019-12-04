@@ -1,6 +1,6 @@
 class Pair: Hashable {
-    let from: String
-    let to: String
+    private let from: String
+    private let to: String
 
     init(from: String, to: String) {
         self.from = from

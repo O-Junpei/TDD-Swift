@@ -2,17 +2,17 @@ class Sum: Expression {
     let augend: Expression
     let addend: Expression
     
-    init(augend: Expression, added: Expression) {
+    init(augend: Expression, addend: Expression) {
         self.augend = augend
-        self.addend = added
+        self.addend = addend
     }
     
     func times(multiplier: Int) -> Expression {
-        return Sum(augend: augend.times(multiplier: multiplier), added: addend.times(multiplier: multiplier))
+        return Sum(augend: augend.times(multiplier: multiplier), addend: addend.times(multiplier: multiplier))
     }
     
-    func plus(expression addend: Expression) -> Expression {
-        return Sum(augend: self, added: addend)
+    func plus(addend: Expression) -> Expression {
+        return Sum(augend: self, addend: addend)
     }
     
     func reduce(bank: Bank, to: String) -> Money {
@@ -20,3 +20,4 @@ class Sum: Expression {
         return Money(amount: amount, currency: to)
     }
 }
+
