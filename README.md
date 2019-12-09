@@ -1,12 +1,12 @@
-弊社弊チームでは TDD を習得するために Kent Beck(著), 和田 卓人(翻訳)の [テスト駆動開発](https://www.amazon.co.jp/%E3%83%86%E3%82%B9%E3%83%88%E9%A7%86%E5%8B%95%E9%96%8B%E7%99%BA-Kent-Beck/dp/4274217884) の輪読をしています。
-[テスト駆動開発](https://www.amazon.co.jp/%E3%83%86%E3%82%B9%E3%83%88%E9%A7%86%E5%8B%95%E9%96%8B%E7%99%BA-Kent-Beck/dp/4274217884) はとても良い本でした。
+弊社弊チームでは TDD を習得するために Kent Beck(著), 和田 卓人(翻訳)の [テスト駆動開発](https://www.amazon.co.jp/%E3%83%86%E3%82%B9%E3%83%88%E9%A7%86%E5%8B%95%E9%96%8B%E7%99%BA-Kent-Beck/dp/4274217884) の輪読をしています。[テスト駆動開発](https://www.amazon.co.jp/%E3%83%86%E3%82%B9%E3%83%88%E9%A7%86%E5%8B%95%E9%96%8B%E7%99%BA-Kent-Beck/dp/4274217884) はとても勉強になりました。
 「写経ではなく別の言語で挑戦することで、TDDをより深く習得したい」 & 「Swift自体の勉強がしたい」と思い、Swift でテスト駆動開発(TDD)に挑戦してみました。
+~~あと会社の先輩が Elm でTDD をしていたので真似してみました。~~
 プロジェクトファイルはこちらに置いてあります。[O-Junpei/TDD-Swift](https://github.com/O-Junpei/TDD-Swift)
 
 ## 方針と注意事項
-本文の内容やコードは、著作権を考慮して極力載せず、Swift のコードとテストのTODOリストだけでやっていきたいと思っています。
-もし関係者の方々から注意喚起があれば記事をすぐに削除します。
-言語が異なるので進め方が多少異なる場合があります。  
+本文の内容やコードは、著作権を考慮して極力載せず、Swift のコードとテストのTODOリストだけでやっていきたいと思っています。Java のコードと似せるため型は明示的に書きました。
+もし関係者の方々から注意喚起があれば記事をすぐに削除します。言語が異なるので進め方が多少異なる場合があります。
+
 
 ## 事前準備
 Include Unit Test にチェックを入れ、テスト環境が整ったプロジェクトを作成します。
@@ -18,12 +18,11 @@ Include Unit Test にチェックを入れ、テスト環境が整ったプロ�
 
 米ドルやフランを扱うことのできる多国通貨オプジェクトを作成します。
 第1章では米ドルの掛け算を実装していきます。
-あまり詰まることがなく、Java の実装を参考に実装をすることができました。
+あまり詰まることがなく、Java の実装を参考に Swift を書きことができました。
 
 ### TODOリスト
 - $5 + 10CHF = $10 (レートが2:1の場合)
 - $5 * 2 = $10
-
 
 
 ``` Dollar.swift
@@ -60,13 +59,14 @@ class TDD_SwiftTests: XCTestCase {
 
 # 第2章 明白な実装
 
-2章もあまり詰まることが無く、実装することができました。
+今章は詰まることがなくSwiftで実装することができました。
+
 
 ### TODOリスト
 - $5 + 10CHF = $10 (レートが2:1の場合)
-- ~~$5 * 2 = $10~~
+- ~~$5 * 2= $10~~
 - amountをprivateにする
-- Dollarの副作用どうする？
+- ~~Dollarの副作用どうする？~~
 - Moneyの丸め処理どうする？
 
 
@@ -113,7 +113,7 @@ Swift の実装では `==`演算子を使用して比較しました。
 - $5 + 10CHF = $10（レートが2:1の場合）
 - ~~$5 * 2 = $10~~
 - amountをprivateにする
-- Dollarの副作用どうする？
+- ~~Dollarの副作用どうする？~~
 - Moneyの丸め処理どうする？
 - equals()
 
@@ -164,7 +164,8 @@ class TDD_SwiftTests: XCTestCase {
 
 # 第4章　意図を語るテスト
 
-今章ではあまり詰まることがなく Swiftで実装することができました。
+今章は詰まることがなくSwiftで実装することができました。
+
 
 ### TODOリスト
 - $5 + 10CHF = $10（レートが2:1の場合）
@@ -176,8 +177,6 @@ class TDD_SwiftTests: XCTestCase {
 - hashCode()
 - nullとの等価性比較
 - 他のオブジェクトとの等価性比較
-
-
 
 
 ``` Dollar.swift
@@ -221,10 +220,9 @@ class TDD_SwiftTests: XCTestCase {
 ```
 
 
-
 # 第5章　原則をあえて破るとき
 
-今章ではあまり詰まることがなく Swiftで実装することができました。
+今章は詰まることがなくSwiftで実装することができました。
 
 ### TODOリスト
 - $5 + 10CHF = $10（レートが2:1の場合）
@@ -307,13 +305,9 @@ class TDD_SwiftTests: XCTestCase {
 ```
 
 
-
-
-
-
 # 第6章　テスト不足に気づいたら
 
-今章ではあまり詰まることがなく Swiftで実装することができました。
+今章は詰まることがなくSwiftで実装することができました。
 
 ### TODOリスト
 - $5 + 10CHF = $10（レートが2:1の場合）
@@ -325,7 +319,7 @@ class TDD_SwiftTests: XCTestCase {
 - hashCode()
 - nullとの等価性比較
 - 他のオブジェクトとの等価性比較
-- 5 CHF * 2 = 10 CHF
+- ~~5 CHF * 2 = 10 CHF~~
 - DollarとFrancの重複
 - equalsの一般化
 - timesの一般化
@@ -344,7 +338,6 @@ class Money: Equatable {
     }
 }
 ```
-
 
 
 ``` Dollar.swift
@@ -405,7 +398,8 @@ class TDD_SwiftTests: XCTestCase {
 # 第7章　疑念をテストに翻訳する
 
 7章ではフランが登場しました。
-Java の実装では `instanceOf` メソッドで型の比較をしていますが、Swift の実装では `type(of: XXX)` メソッドを使用することで比較しました。
+Java の実装では `instanceOf` メソッドで型の比較をしています。
+Swift の実装では `type(of: XXX)` メソッドを使用することで比較しました。
 
 ### TODOリスト
 - $5 + 10CHF = $10（レートが2:1の場合）
@@ -417,9 +411,9 @@ Java の実装では `instanceOf` メソッドで型の比較をしています�
 - hashCode()
 - nullとの等価性比較
 - 他のオブジェクトとの等価性比較
-- 5 CHF * 2 = 10 CHF
+- ~~5 CHF * 2 = 10 CHF~~
 - DollarとFrancの重複
-- equalsの一般化
+- ~~equalsの一般化~~
 - timesの一般化
 - FrancとDollarを比較する
 
@@ -437,8 +431,6 @@ class Money: Equatable {
     }
 }
 ```
-
-
 
 ``` Dollar.swift
 class Dollar: Money {
@@ -464,7 +456,6 @@ class Franc: Money {
     }
 }
 ```
-
 
 ``` TDD_SwiftTests.swift
 import XCTest
@@ -496,12 +487,10 @@ class TDD_SwiftTests: XCTestCase {
 
 
 
-
-
 # 第8章　実装を隠す
 
-今回は少し困りました。
-Java の実装で abstract クラスが登場したためです。
+今章は少し困りました。
+Java の実装で Abstract クラスが登場したためです。
 Swift には Abstract クラスに相当するものが無いため、 `Money` クラスを具象クラスとして定義してしまいました。
 もしもっと良い書き方があればコメントいただきたいです。。。！
 
@@ -521,7 +510,6 @@ Swift には Abstract クラスに相当するものが無いため、 `Money` �
 - timesの一般化
 - ~~FrancとDollarを比較する~~
 - 通過の概念
-
 
 
 ``` Money.swift
@@ -549,7 +537,6 @@ class Money: Equatable {
     }
 }
 ```
-
 
 
 ``` Dollar.swift
@@ -607,12 +594,9 @@ class TDD_SwiftTests: XCTestCase {
 ```
 
 
-
-
-
 # 第9章　歩幅の調整
 
-今回はあまり詰まらず実装できました。
+今章は詰まることがなくSwiftで実装することができました。
 
 ### TODOリスト
 - $5 + 10CHF = $10（レートが2:1の場合）
@@ -660,7 +644,6 @@ class Money: Equatable {
     }
 }
 ```
-
 
 ``` Dollar.swift
 class Dollar: Money {
@@ -723,8 +706,8 @@ class TDD_SwiftTests: XCTestCase {
 
 # 第10章　テストに聞いてみる
 
-Java だと `toString` メソッドでなんとかします。
-Swift でそれに相当するものは `CustomStringConvertible` プロトコルに準拠し、`description` だと思ったので実装しました。
+エラーメッセージをわかりやすくするため、Java の実装では `toString` メソッドを作成しました。
+Swift で `toString` メソッドに相当するものは `description` Computed property であるため、`CustomStringConvertible` プロトコルに準拠して実装しました。
 
 ### TODOリスト
 - $5 + 10CHF = $10（レートが2:1の場合）
@@ -741,7 +724,7 @@ Swift でそれに相当するものは `CustomStringConvertible` プロトコ�
 - ~~equalsの一般化~~
 - timesの一般化
 - ~~FrancとDollarを比較する~~
-- 通過の概念
+- ~~通過の概念~~
 - testFrancMultiplicationを削除する
 
 
@@ -777,8 +760,6 @@ class Money: Equatable, CustomStringConvertible {
 }
 ```
 
-
-
 ``` Dollar.swift
 class Dollar: Money {
     override init(amount: Int, currency: String) {
@@ -794,7 +775,6 @@ class Franc: Money {
     }
 }
 ```
-
 
 ``` TDD_SwiftTests.swift
 import XCTest
@@ -833,15 +813,9 @@ class TDD_SwiftTests: XCTestCase {
 ```
 
 
-
-
-
-
-
-
 # 第11章　不要になったら消す
 
-今回はあまり困らず実装することができました。
+今章は詰まることがなくSwiftで実装することができました。
 
 ### TODOリスト
 - $5 + 10CHF = $10（レートが2:1の場合）
@@ -856,9 +830,9 @@ class TDD_SwiftTests: XCTestCase {
 - ~~5 CHF * 2 = 10 CHF~~
 - DollarとFrancの重複
 - ~~equalsの一般化~~
-- timesの一般化
+- ~~timesの一般化~~
 - ~~FrancとDollarを比較する~~
-- 通過の概念
+- ~~通過の概念~~
 - testFrancMultiplicationを削除する
 
 
@@ -894,7 +868,6 @@ class Money: Equatable, CustomStringConvertible {
 }
 ```
 
-
 ``` TDD_SwiftTests.swift
 import XCTest
 @testable import TDD_Swift
@@ -920,19 +893,14 @@ class TDD_SwiftTests: XCTestCase {
 ```
 
 
-
-
 # 第12章　設計とメタファー
 
-あまり困らず実装できました。
+今章は詰まることがなくSwiftで実装することができました。
+
 
 ### TODOリスト
 - $5 + 10CHF = $10（レートが2:1の場合）
 - $5 + $5 = $10
-
-
-
-
 
 ``` Money.swift
 class Money: Equatable, CustomStringConvertible, Expression {
@@ -1010,8 +978,8 @@ class TDD_SwiftTests: XCTestCase {
 
 # 第13章　実装を導くテスト
 
-型のキャストがあります。
-Swift は `if let` 構文でいい感じにできるので、いい感じにできます。
+Java の実装の途中で型のキャストを行う箇所があります。
+`if let` 構文で安全にキャストすることができます。
 
 ```
 if let money = source as? Money {
@@ -1149,21 +1117,17 @@ class TDD_SwiftTests: XCTestCase {
 ```
 
 
-
-
-
-
-
-
 # 第14章　学習用テストと回帰テスト
 
-ここもあまり困らず実装することができました。
+今章は詰まることがなくSwiftで実装することができました。
 
 ### TODOリスト
 - $5 + 10CHF = $10（レートが2:1の場合）
 - $5 + $5 = $10
-
-
+- $5 + $5 が Money を返す
+- ~~Bank.reduce(Money)~~
+- Money を変換して換算を行う
+- Reduce(Bank, String)
 
 
 ``` Money.swift
@@ -1276,7 +1240,6 @@ class Pair: Hashable {
 }
 ```
 
-
 ``` TDD_SwiftTests.swift
 import XCTest
 @testable import TDD_Swift
@@ -1341,22 +1304,19 @@ class TDD_SwiftTests: XCTestCase {
 ```
 
 
-
-
-
-
 # 第15章　テスト任せとコンパイラ任せ
 
-Java の実装を参考にしながら Swift で実装したところ、 `Protocol type 'Expression' cannot conform to 'Equatable' because only concrete types can conform to protocols` って怒られました。
-Swift だと `protcol` 同士の比較ができないそうなので、仕方なくこんな感じで書きました。
+Java の実装を参考にしながら Swift で実装したところ、 `Protocol type 'Expression' cannot conform to 'Equatable' because only concrete types can conform to protocols` と怒られてしまいました。
+Swift だと `protcol` 同士の比較ができなそうなので、`Money` クラスで比較しました。
+
 
 ### TODOリスト
 - $5 + 10CHF = $10（レートが2:1の場合）
-- $5 + $5 = $10
+- ~~$5 + $5 = $10~~
 - $5 + $5 = $10がMoneyを返す
-- Bank.reduce(Money)
-- Moneyを変換して換算を行う
-- Reduce(Bank, String)
+- ~~Bank.reduce(Money)~~
+- ~~Moneyを変換して換算を行う~~
+- ~~Reduce(Bank, String)~~
 
 
 ``` Money.swift
@@ -1552,8 +1512,7 @@ class TDD_SwiftTests: XCTestCase {
 
 # 第16章　将来の読み手を考えたテスト
 
-
-
+今章は詰まることがなくSwiftで実装することができました。
 
 ### TODOリスト
 - $5 + 10CHF = $10（レートが2:1の場合）
@@ -1564,8 +1523,6 @@ class TDD_SwiftTests: XCTestCase {
 - ~~Reduce(Bank, String)~~
 - Sum.plus
 - Expression.times
-
-
 
 
 ``` Money.swift
@@ -1787,13 +1744,11 @@ class TDD_SwiftTests: XCTestCase {
 
 # まとめ
 
-TDD 楽しかったです。
-すごく話しかけるようになんとかしてくれて、すごく勉強になりました。
-皆さんの好きな言語で出来たらいいと思います。
-そして Swift で実装しようとしている人の参考になれば嬉しいです。
+Swift で TDD ができて楽しかったです。
+Swift TDD をしようとしている人の参考になれば嬉しいです。
 
 
 # 参考
-[テスト駆動開発](https://www.amazon.co.jp/%E3%83%86%E3%82%B9%E3%83%88%E9%A7%86%E5%8B%95%E9%96%8B%E7%99%BA-Kent-Beck/dp/4274217884)  
-[関数型言語Elmでテスト駆動開発(第1~4章)](https://qiita.com/ababup1192/items/d6ca1af6efcbac8d550f)  
-[関数型言語Elmでテスト駆動開発(第5~7章)](https://qiita.com/ababup1192/items/5b9d6293210b1b09015d)  
+[テスト駆動開発](https://www.amazon.co.jp/%E3%83%86%E3%82%B9%E3%83%88%E9%A7%86%E5%8B%95%E9%96%8B%E7%99%BA-Kent-Beck/dp/4274217884)
+[関数型言語Elmでテスト駆動開発(第1~4章)](https://qiita.com/ababup1192/items/d6ca1af6efcbac8d550f)
+[関数型言語Elmでテスト駆動開発(第5~7章)](https://qiita.com/ababup1192/items/5b9d6293210b1b09015d)
